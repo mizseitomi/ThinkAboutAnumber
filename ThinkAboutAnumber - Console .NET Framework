@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Gondoltam_egy_számra
+{
+    class Program
+    {       
+        static void Main(string[] args)
+        {            
+            Game();
+            Console.ReadLine();
+        }
+        static void Game()
+        {     
+            Random random = new Random();
+            Random tipp = new Random();
+            Console.WriteLine("Gondoltam egy számra 1 és 1000 között. Tippelj te is, én is tippelek, az nyer, aki közelebb áll a gondolt számhoz!");
+            Console.Write("A te tipped: ");
+            int player = int.Parse(Console.ReadLine());
+            int num = random.Next(0, 1001);
+            int game = tipp.Next(0, 1001);
+
+            if (game == num) game = tipp.Next(0, 1001);            
+
+            int gamedif = 0;
+            int playerdif = 0;
+
+            if (game > num) gamedif = game - num;
+            else gamedif = num - game;
+
+            if (player > num) playerdif = player - num;
+            else playerdif = num - player;
+
+            Console.WriteLine("A gondolt szám a {0} volt.", num);
+            Console.Write("Te {0}-t tippeltél, én {1}-t, ", player, game);
+            if (playerdif < gamedif)
+            {
+                Console.WriteLine("tehát Te nyertél.\n");
+                Console.ReadLine();
+                Repeat();
+            }
+            else if (gamedif < playerdif)
+            {
+                Console.WriteLine("tehát Én nyertem.\n");
+                Console.ReadLine();
+                Repeat();
+            }
+            
+            Console.ReadLine();                       
+            
+
+        }
+
+        static void Repeat()
+        {
+            Console.Clear();
+            Console.Write("Játszunk még egy kört? y - n: ");
+            string answer = Console.ReadLine();
+            if (answer == "y")
+            {
+                Console.Clear();
+                Game();
+            }
+            else if (answer == "n") System.Environment.Exit(1);
+        }  
+        
+    }
+}
